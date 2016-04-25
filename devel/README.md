@@ -1,4 +1,4 @@
-#this code is in alpha phase. Will only play the rock paper scissors function I am working on trying to add other options by creating a list for all the avaliable options but unfortunatly the code brakes after 3 or 5 rounds any suggestions will be much  appreciated
+#This is the final version of the game
 #updated rock paper scissors game now has 12 options enter options using letters as your input.
 #all avalible options
 #r=rock
@@ -13,12 +13,14 @@
 #a=air
 #f=fire
 #e=earth
+#Hidden in the code there is a way to get 1 free point.....you may need it but its up to you to figure it out.
 
 #Instructions for Running my Project
 #step 1 open a new file on python
 #step 2 copy and paste the code
 #step 3 select run module from the options menu
 #step 4 enjoy!
+
 
 
 import random
@@ -54,11 +56,14 @@ while run == True:
         user_input = 11
     else:
         print("Please enter a valid choice.")
+        if user_input == "joust":
+            wins = wins + 1           
         continue
     comp_input = random.randint(0, 11)
     print(choicelist[user_input], "vs.", choicelist[comp_input])
     if user_input == comp_input:
-        print("Tie.")
+        print("Joust.")
+        losses += -1
     elif ((user_input - comp_input + 3) % 3 == 1):
         print("Win.")
         wins = wins + 1
