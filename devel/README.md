@@ -1,120 +1,81 @@
-#this code is in alpha phase. Will only play the rock paper scissors function I am working on trying to add other options by creating a list for all the avaliable options but unfortunatly the code brakes after 3 or 5 rounds any suggestions will be much  appreciated.
+#this code is in alpha phase. Will only play the rock paper scissors function I am working on trying to add other options by creating a list for all the avaliable options but unfortunatly the code brakes after 3 or 5 rounds any suggestions will be much  appreciated
+#updated rock paper scissors game now has 12 options enter options using letters as your input.
+#all avalible options
+#r=rock
+#p=paper
+#s=scissors
+#l=lightsaber
+#b=blaster
+#i=ion grenade
+#w=wolf
+#h=human
+#g=goblin
+#a=air
+#f=fire
+#e=earth
+
 # Instructions for Running my Project
 #step 1 open a new file on python
 #step 2 copy and paste the code
-#step 3 select run from the options menu
+#step 3 select run module from the options menu
 #step 4 enjoy!
 
-import random 
 
-#define main 
-def main(): 
-    #assign win, lose, and tie to zero for tallying
-    win = 0 
-    lose = 0 
-    tie = 0 
-
-    #control loop with 'y' variable 
-    play_again = 'y' 
-
-    #start the game 
-    while play_again == 'y': 
-        #make a welcome message and give directions 
-        print('Prepare to battle in a game of paper, rock, scissors!') 
-        print('Please input the correct number according') 
-        print('to the object you want to choose.') 
-
-        #Get the player and computers choices and 
-        #assign them to variables 
-        computer_choice = get_computer_choice() 
-        player_choice = get_player_choice() 
-
-        #print choices 
-        print('Computer chose', computer_choice, '.') 
-        print('You chose', player_choice, '.') 
-
-        #determine who won 
-        winner_result(computer_choice, player_choice) 
-
-        #ask the user if they want to play again 
-        play_again = input("Play again? Enter 'y' for yes or 'n' for no. ") 
-
-    #print results 
-    print('Your total wins are', win, '.') 
-    print('Your total losses are', lose, '.') 
-    print('Your total ties are', tie, '.') 
-
-#define computer choice 
-def get_computer_choice(): 
-    #use imported random function from library 
-    choice = random.randint(1,3) 
-
-    #assign what the computer chose to rock, paper, or scissors 
-    if choice == 1: 
-        choice = 'ROCK' 
-    elif choice == 2: 
-        choice = 'PAPER' 
-    else: 
-        choice = 'SCISSORS' 
-
-    #return value 
-    return choice 
-
-#define player choice 
-def get_player_choice(): 
-    #assign input to variable by prompting user 
-    choice = int(input("Select rock(1), paper(2), or scissors(3): ")) 
-
-    #Detect invalid entry
-    while choice != 1 and choice != 2 and choice != 3: 
-        print('The valid numbers are rock(type in 1), paper(type in 2),') 
-        print('or scissors(type in 3).') 
-        choice = int(input('Enter a valid number please: ')) 
-
-    #assign what the player chose based on entry 
-    if choice == 1: 
-        choice = 'ROCK' 
-    elif choice == 2: 
-        choice = 'PAPER' 
-    else: 
-        choice = 'SCISSORS' 
-
-    #return value 
-    return choice 
-
-#determine the winner from the variables 
-def winner_result(computer_choice, player_choice): 
-    #if its a tie, add 1 to tie variable and display message 
-    if computer_choice == player_choice:
-        result = 'tie'
-        print("It's a tie!")
-
-    #if its a win, add to win tally and display message 
-    elif computer_choice == 'SCISSORS' and player_choice == 'ROCK':
-        result = 'win'
-        print('ROCK crushes SCISSORS! You win!')
-    elif computer_choice == 'PAPER' and player_choice == 'SCISSORS': 
-        result = 'win'
-        print('SCISSORS cut PAPER! You win!')
-    elif computer_choice == 'ROCK' and player_choice == 'PAPER': 
-        result = 'win'
-        print('PAPER covers ROCK! You win!')
-
-    #if it does not match any of the win criteria then add 1 to lose and 
-    #display lose message 
-    else: 
-        result = 'lose'
-        print('You lose!')
-
-def result(winner_result,player_choice, computer_choice):
-
-    # accumulate the appropriate winner of game total
-    if result == 'win':
-        win += 1
-    elif result == 'lose':
-        lose += 1
+import random
+choicelist = ["Rock", "Paper", "Scissors","lightsaber","blaster","ion grenade","wolf","human","goblin","air","fire","earth"]
+wins = 0
+losses = 0
+run = True
+while run == True:
+    user_input = input(str("r for rock, p for paper, and s for scissors.\n"))
+    if user_input == "r":
+        user_input = 0
+    elif user_input == "p":
+        user_input = 1
+    elif user_input == "s":
+        user_input = 2
+    elif user_input == "l":
+        user_input = 3
+    elif user_input == "b":
+        user_input = 4
+    elif user_input == "i":
+        user_input = 5
+    elif user_input == "w":
+        user_input = 6
+    elif user_input == "h":
+        user_input = 7
+    elif user_input == "g":
+        user_input = 8
+    elif user_input == "a":
+        user_input = 9
+    elif user_input == "f":
+        user_input = 10
+    elif user_input == "e":
+        user_input = 11
     else:
-        tie += 1
-    return result
-
-main() 
+        print("Please enter a valid choice.")
+        continue
+    comp_input = random.randint(0, 11)
+    print(choicelist[user_input], "vs.", choicelist[comp_input])
+    if user_input == comp_input:
+        print("Tie.")
+    elif ((user_input - comp_input + 3) % 3 == 1):
+        print("Win.")
+        wins = wins + 1
+    else:
+        print("Lose.")
+        losses += 1
+    print("Player: ", wins, "\nComputer: ", losses)
+    again = True
+    while again == True:
+        playagain = input(str("Play again (y or n)? "))
+        if playagain == "n":
+            print("Goodbye!")
+            run = False
+            again = False
+        elif playagain == "y":
+            print("Let's play again.")
+            again = False
+        else:
+            print("Please enter a valid choice.")
+            continue
